@@ -103,6 +103,8 @@ elif option == "Dataset":
         string_data = stringio.read()
         # Can be used wherever a "file-like" object is accepted:
         df = pd.read_csv(uploaded_files)
+        if "Unnamed: 0" in df.columns:
+            df.drop("Unnamed: 0", axis=1, inplace=True)
         st.write(df)
         st.write(f"Total {df.shape[0]} row with {df.shape[1]} columns")
     a = st.button("Analysis Data for Cleaning", type="primary")
@@ -163,6 +165,8 @@ elif option == "Advanced Analysis":
         string_data = stringio.read()
         # Can be used wherever a "file-like" object is accepted:
         df = pd.read_csv(uploaded_files)
+        if "Unnamed: 0" in df.columns:
+            df.drop("Unnamed: 0", axis=1, inplace=True)
         st.write(df)
         st.write(f"Total {df.shape[0]} row with {df.shape[1]} columns")
 
@@ -266,6 +270,8 @@ elif option == "Machine Learning":
         string_data = stringio.read()
         # Can be used wherever a "file-like" object is accepted:
         df = pd.read_csv(uploaded_files)
+        if "Unnamed: 0" in df.columns:
+            df.drop("Unnamed: 0", axis=1, inplace=True)
         st.write(df)
         st.write(f"Total {df.shape[0]} row with {df.shape[1]} columns")
         columns = df.columns
