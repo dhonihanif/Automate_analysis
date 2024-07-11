@@ -368,8 +368,8 @@ elif option == "Machine Learning":
                     elif ml == "Support Vector Machine":
                         model = SVR().fit(X_train, y_train)
                     elif ml == "Lazy Predict":
-                        clf = LazyClassifier(verbose=0, ignore_warnings=True)
-                        models, predictions = clf.fit(X_train, X_test, y_train, y_test)
+                        reg = LazyRegressor(verbose=0, ignore_warnings=True)
+                        models, predictions = reg.fit(X_train, X_test, y_train, y_test)
 
                     if "model" in vars():
                         y_pred = model.predict(X_test)
