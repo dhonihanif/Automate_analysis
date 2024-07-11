@@ -14,7 +14,7 @@ from sklearn.svm import SVC, SVR
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.naive_bayes import BernoulliNB, GaussianNB
-from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, r2_score, mean_squared_error, mean_absolute_error
 
 from lazypredict.Supervised import LazyClassifier, LazyRegressor
 
@@ -352,7 +352,14 @@ elif option == "Machine Learning":
                         st.pyplot(fig)
                         st.write()
                         accuracy = accuracy_score(y_test, y_pred)
-                        st.write(f"Accuracy : {accuracy*100:.2f}%")
+                        precision = precision_score(y_test, y_pred, average="micro")
+                        recall = recall_score(y_test, y_pred, average="micro")
+                        f1 = f1_score(y_test, y_pred, average="micro")
+                        evaluates = pd.DataFrame({"Accuracy Score": f"{accuracy*100:.2f}%",
+                                                  "Precision Score": f"{precision*100:.2f}%",
+                                                  "Recall Score": f"{recall*100:.2f}%",
+                                                  "F1 Score": f"{f1*100:.2f}%"})
+                        
                     elif "models" in vars():
                         st.write(models)
 
@@ -383,5 +390,14 @@ elif option == "Machine Learning":
                         ax[0].set_title("Training Predict")
                         ax[1].set_title("Testing Predict")
                         st.pyplot(fig)
+                        r2 = r2_score(y_test, y_pred)
+                        mse = mean_squared_error(y_test, y_pred)
+                        rmse = mse ** (1/2)
+                        mae = mean_absolute_error(y_test, y_pred)
+                        evaluates = pd.DataFrame({"R2 Score": f"{r2*100:.2f}%",
+                                                  "Mean Squared Error": f"{mse*100:.2f}%",
+                                                  "Root Mean Squared Error": f"{rmse*100:.2f}%",
+                                                  "Mean Absolute Error": f"{mae*100:.2f}%"})
+                        st.write(evaluates)
                     elif "models" in vars():
                         st.write(models)
