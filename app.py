@@ -16,6 +16,8 @@ from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.naive_bayes import BernoulliNB, GaussianNB
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
+from lazypredict.Supervised import LazyClassifier, LazyRegressor
+
 def data(data):
     # Load data
     df = pd.read_excel(data)
@@ -335,6 +337,9 @@ elif option == "Machine Learning":
                         model = BernoulliNB().fit(X_train, y_train)
                     elif ml == "Support Vector Machine":
                         model = SVC().fit(X_train, y_train)
+                    elif ml == "Lazy Predict":
+                        clf = LazyClassifier(verbose=0, ignore_warnings=True)
+                        models, predictions = clf.fit(X_train, X_test, y_train, y_test)
                     
                     if "model" in vars():
                         y_pred = model.predict(X_test)
@@ -348,6 +353,9 @@ elif option == "Machine Learning":
                         st.write()
                         accuracy = accuracy_score(y_test, y_pred)
                         st.write(f"Accuracy : {accuracy*100:.2f}%")
+                    elif "models" in vars():
+                        st.write(models)
+
                 elif task == "Regression task":
                     if ml == "Linear/Logistic Regression":
                         model = LinearRegression().fit(X_train, y_train)
@@ -359,7 +367,10 @@ elif option == "Machine Learning":
                         model = GaussianNB().fit(X_train, y_train)
                     elif ml == "Support Vector Machine":
                         model = SVR().fit(X_train, y_train)
-                    
+                    elif ml == "Lazy Predict":
+                        clf = LazyClassifier(verbose=0, ignore_warnings=True)
+                        models, predictions = clf.fit(X_train, X_test, y_train, y_test)
+
                     if "model" in vars():
                         y_pred = model.predict(X_test)
                         y_ = model.predict(X_train)
@@ -372,3 +383,5 @@ elif option == "Machine Learning":
                         ax[0].set_title("Training Predict")
                         ax[1].set_title("Testing Predict")
                         st.pyplot(fig)
+                    elif "models" in vars():
+                        st.write(models)
