@@ -358,7 +358,7 @@ elif option == "Machine Learning":
                         evaluates = pd.DataFrame({"Accuracy Score": f"{accuracy*100:.2f}%",
                                                   "Precision Score": f"{precision*100:.2f}%",
                                                   "Recall Score": f"{recall*100:.2f}%",
-                                                  "F1 Score": f"{f1*100:.2f}%"})
+                                                  "F1 Score": f"{f1*100:.2f}%"}, index=[0, 1, 2, 3])
                         
                     elif "models" in vars():
                         st.write(models)
@@ -397,7 +397,7 @@ elif option == "Machine Learning":
                         evaluates = pd.DataFrame({"R2 Score": f"{r2*100:.2f}%",
                                                   "Mean Squared Error": f"{mse*100:.2f}%",
                                                   "Root Mean Squared Error": f"{rmse*100:.2f}%",
-                                                  "Mean Absolute Error": f"{mae*100:.2f}%"})
+                                                  "Mean Absolute Error": f"{mae*100:.2f}%"}, index=[0, 1, 2, 3])
                         st.write(evaluates)
                     elif "models" in vars():
                         st.write(models)
